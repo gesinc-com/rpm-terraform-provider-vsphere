@@ -30,7 +30,8 @@ Epoch:		0
 Group:		Applications/System
 License:	MPL2; info@terraform.io
 
-URL:		https://%{host}/%{owner}/%{repo}
+%global	url	https://%{host}/%{owner}/%{repo}
+URL:		%{url}
 Source0:	%{url}/archive/%{archive}
 
 BuildRequires: golang make
