@@ -81,7 +81,7 @@ install -d -m 755 %{buildroot}%{_bindir}
 %{_bindir}/*
 
 
-%changelog
 # %(date +"%a %b %d %Y") $Author: build $ %{version}-%{release}
-#
-#  $Log$
+%changelog
+Thu Jan 16 2020 bishopolis@gmail.com 1.14.0-0.1
+- Initial
