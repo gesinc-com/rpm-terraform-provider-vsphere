@@ -57,7 +57,7 @@ mv !(src) src/%{namespace}/
 shopt -u extglob dotglob
 pushd src/%{namespace}/
 #go get %{namespace}/something
-go get github.com/Sirupsen/logrus
+#go get github.com/Sirupsen/logrus
 
 make build
 popd
