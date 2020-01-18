@@ -34,8 +34,8 @@ License:	MPL2; info@terraform.io
 URL:		%{url}
 Source0:	%{url}/archive/%{archive}
 
-BuildRequires: golang make
-Requires:      terraform
+BuildRequires:	%{?go_compiler:compiler(go-compiler)}%{!?go_compiler:golang} make
+Requires:	terraform
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
