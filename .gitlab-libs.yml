@@ -53,7 +53,7 @@ tools:
                $(rpm --eval '%_rpmdir') \
                $(rpm --eval '%_srcrpmdir') \
                $(rpm --eval '%_builddir') \
-               $(: rpm --eval '%_specdir') \
+               $(rpm --eval '%_specdir') \
       | xargs mkdir -pv
       spectool -g -R $(rpm --eval '%_specdir')/${SPECNAME:-nothing}.spec
       find SOURCES -ls
