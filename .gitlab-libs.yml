@@ -95,7 +95,6 @@ tools:
 repo:
   tags:
     - repo
-    - cob-it
   stage: register
   before_script:
     - *macros
