@@ -1,0 +1,32 @@
+include: '.gitlab-libs.yml'
+
+.vsphere:
+  variables:
+    SPECNAME: golang-github-terraform-provider-vsphere
+  only:
+    changes:
+      - SPECS/golang-github-terraform-provider-vsphere.spec
+
+vsphere:makedirs:
+  extends:
+    - .vsphere
+    - .makedirs
+
+vsphere:build_SRPM:
+  extends:
+    - .vsphere
+    - .build_SRPM
+  needs: ["vsphere:makedirs"]
+
+vsphere:get_BUILD_pre-reqs:
+  extends:
+    - .vsphere
+    - .get_BUILD_pre-reqs
+  needs: ["vsphere:makedirs", "vsphere:build_SRPM"]
+
+vsphere:build_RPM:
+  extends:
+    - .vsphere
+    - .build_RPM
+  needs: ["vsphere:makedirs", "vsphere:build_SRPM","vsphere:get_BUILD_pre-reqs"]
+
