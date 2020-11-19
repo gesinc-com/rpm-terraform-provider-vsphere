@@ -83,5 +83,5 @@ install -d -m 755 %{buildroot}%{_bindir}
 
 # %(date +"%a %b %d %Y") $Author: build $ %{version}-%{release}
 %changelog
-Thu Jan 16 2020 bishopolis@gmail.com 1.14.0-0.1
+* Thu Jan 16 2020 bishopolis@gmail.com 1.14.0-0.1
 - Initial
