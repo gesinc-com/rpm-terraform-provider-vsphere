@@ -38,9 +38,9 @@ BuildRequires:	%{?go_compiler:compiler(go-compiler)}%{!?go_compiler:golang} make
 Requires:	terraform
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+
 %description
 Terraform provider for vSphere
-
 
 
 %prep
@@ -62,6 +62,7 @@ pushd src/%{namespace}/
 make build
 popd
 
+
 %install
 [ "%{buildroot}" = "/" ] || [ ! -d %{buildroot} ] || rm -rf %{buildroot}
 install -d -m 755 %{buildroot}
@@ -71,6 +72,7 @@ install -d -m 755 %{buildroot}%{_bindir}
 %{__install} \
 	bin/%{repo} \
 	%{buildroot}%{_bindir}/
+
 
 %clean
 [ "%{buildroot}" = "/" ] || [ ! -d %{buildroot} ] || rm -rf %{buildroot}
