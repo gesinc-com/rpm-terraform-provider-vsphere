@@ -1,3 +1,4 @@
+
 %global	owner	terraform-providers
 %global	repo	terraform-provider-vsphere
 %global	host	github.com
