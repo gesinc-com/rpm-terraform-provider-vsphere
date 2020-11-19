@@ -21,13 +21,15 @@ stages:
       %_srcrpmdir    %{_topdir}/SRPMS%{?apt:.%{apt}}
       
       #  Builds occur in a standard space
-      %_builddir     %{_topdir}/BUILD
+      %_builddir     /dev/shm
+      #%_builddir     %{_topdir}/BUILD
       
       #  Source and Spec under cvs area
       %_specdir      %{_topdir}/SPECS
       %_sourcedir    %{_topdir}/SOURCES
 
-      %_build_name_fmt    %%{ARCH}/%%{NAME}-%%{VERSION}-%%{RELEASE}.%{dis}%{tro}.%%{ARCH}.rpm
+      #%_build_name_fmt    %%{ARCH}/%%{NAME}-%%{VERSION}-%%{RELEASE}.%{dis}%{tro}.%%{ARCH}.rpm
+      %_build_name_fmt    %%{NAME}-%%{VERSION}-%%{RELEASE}.%{dis}%{tro}.%%{ARCH}.rpm
       EOF
 
 .tags:
@@ -42,7 +44,7 @@ tools:
   script:
     - |
       sudo -n yum install -y rpm-build rpmdevtools
-      #mkdir .junk ; rsync -a --delete .junk/ RPMS/ ; rsync -a --delete .junk/ SRPMS/
+      rm -rf *RPMS/*   # scortch
 
 .makedirs:
   extends: .tags
@@ -95,6 +97,7 @@ tools:
 repo:
   tags:
     - repo
+    - prod
   stage: register
   before_script:
     - *macros
@@ -102,7 +105,7 @@ repo:
   script:
     - |
       TREE=${CI_COMMIT_REF_SLUG}/$(rpm --eval "%dis/%tro")
-      PUBROOT=~/public_html/${TREE}/
+      PUBROOT=${PUBBASE}/${TREE}/
       mkdir -p ${PUBROOT}
       # push any artifacts to service dir
       find . \
@@ -112,5 +115,15 @@ repo:
       find ${PUBROOT} \
         -name \*RPMS -type d \
         -exec createrepo ${CREATEREPO_OPTS:-} ${ADDL_OPTS:-} {} \;
+  variables:
+    PUBBASE: ~/public_html
   artifacts: {}
+  cache: {}
 
+repo_test:
+  extends: repo
+  tags:
+    - repo
+    - test
+  variables:
+    PUBBASE: /var/tmp
