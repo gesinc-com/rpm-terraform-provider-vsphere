@@ -87,3 +87,4 @@ install -d -m 755 %{buildroot}%{_bindir}
 %changelog
 * Thu Jan 16 2020 bishopolis@gmail.com 1.14.0-0.1
 - Initial
+
