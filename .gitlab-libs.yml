@@ -93,6 +93,9 @@ tools:
     paths:
     - SRPMS/
     - RPMS/
+  cache:
+    paths:
+      - $GOPATH/pkg/mod
 
 repo:
   tags:
