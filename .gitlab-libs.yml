@@ -102,6 +102,8 @@ repo:
     - repo
     - prod
   stage: register
+  only:
+    - master
   before_script:
     - *macros
     - sudo -n yum install -y createrepo --nogpgcheck
@@ -128,5 +130,7 @@ repo_test:
   tags:
     - repo
     - test
+  except:
+    - master
   variables:
     PUBBASE: /var/tmp
