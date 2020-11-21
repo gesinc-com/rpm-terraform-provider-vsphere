@@ -6,6 +6,8 @@ include: '.gitlab-libs.yml'
   only:
     changes:
       - SPECS/golang-github-terraform-provider-vsphere.spec
+      - .gitlab-ci.yml
+      - .gitlab-libs.yml
 
 vsphere:makedirs:
   extends:
