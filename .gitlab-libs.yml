@@ -127,7 +127,7 @@ repo:
   only:
     - master
   variables:
-    PUBBASE: ~/public_html
+    PUBBASE: ${HOME}/public_html
 
 repo_test:
   extends: .repo
