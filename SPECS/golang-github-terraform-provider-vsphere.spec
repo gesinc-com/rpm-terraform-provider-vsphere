@@ -47,7 +47,7 @@ Terraform provider for vSphere
 %setup -q -n %{dir}
 
 %build
-export GOPATH=$PWD
+export GOPATH=${GOPATH:-$PWD}
 export GOOS=linux
 export GOARCH=amd64
 mkdir -p src/%{namespace}/
@@ -56,8 +56,6 @@ shopt -s extglob dotglob
 mv !(src) src/%{namespace}/
 shopt -u extglob dotglob
 pushd src/%{namespace}/
-#go get %{namespace}/something
-#go get github.com/Sirupsen/logrus
 
 make build
 popd

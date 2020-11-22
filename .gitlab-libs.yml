@@ -88,7 +88,8 @@ tools:
   extends: .tags
   stage: build
   script:
-    - rpmbuild -bb $(rpm --eval '%_specdir')/${SPECNAME:-nothing}.spec 
+    - chown -R u+w  $(rpm --eval '%_builddir')/*/pkg ||:
+    - GOPATH=/var/tmp rpmbuild -bb $(rpm --eval '%_specdir')/${SPECNAME:-nothing}.spec 
   artifacts:
     paths:
     - SRPMS/
