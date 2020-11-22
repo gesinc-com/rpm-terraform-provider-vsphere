@@ -30,16 +30,17 @@ Epoch:		0
 Group:		Applications/System
 License:	MPL2; info@terraform.io
 
-URL:		https://%{host}/%{owner}/%{repo}
+%global	url	https://%{host}/%{owner}/%{repo}
+URL:		%{url}
 Source0:	%{url}/archive/%{archive}
 
-BuildRequires: golang make
-Requires:      terraform
+BuildRequires:	%{?go_compiler:compiler(go-compiler)}%{!?go_compiler:golang} make
+Requires:	terraform
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 
 %description
 Terraform provider for vSphere
-
 
 
 %prep
@@ -55,11 +56,10 @@ shopt -s extglob dotglob
 mv !(src) src/%{namespace}/
 shopt -u extglob dotglob
 pushd src/%{namespace}/
-#go get %{namespace}/something
-go get github.com/Sirupsen/logrus
 
 make build
 popd
+
 
 %install
 [ "%{buildroot}" = "/" ] || [ ! -d %{buildroot} ] || rm -rf %{buildroot}
@@ -71,6 +71,7 @@ install -d -m 755 %{buildroot}%{_bindir}
 	bin/%{repo} \
 	%{buildroot}%{_bindir}/
 
+
 %clean
 [ "%{buildroot}" = "/" ] || [ ! -d %{buildroot} ] || rm -rf %{buildroot}
 
@@ -80,7 +81,8 @@ install -d -m 755 %{buildroot}%{_bindir}
 %{_bindir}/*
 
 
-%changelog
 # %(date +"%a %b %d %Y") $Author: build $ %{version}-%{release}
-#
-#  $Log$
+%changelog
+* Thu Jan 16 2020 bishopolis@gmail.com 1.14.0-0.1
+- Initial
+
