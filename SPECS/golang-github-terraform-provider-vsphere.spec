@@ -47,7 +47,7 @@ Terraform provider for vSphere
 %setup -q -n %{dir}
 
 %build
-export GOPATH=${GOPATH:-$PWD}
+export GOPATH=$PWD
 export GOOS=linux
 export GOARCH=amd64
 mkdir -p src/%{namespace}/
