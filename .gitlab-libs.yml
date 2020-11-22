@@ -98,13 +98,8 @@ tools:
     paths:
       - $GOPATH/pkg/mod
 
-repo:
-  tags:
-    - repo
-    - prod
+.repo:
   stage: register
-  only:
-    - master
   before_script:
     - *macros
     - sudo -n yum install -y createrepo --nogpgcheck
@@ -121,17 +116,24 @@ repo:
       find ${PUBROOT} \
         -name \*RPMS -type d \
         -exec createrepo ${CREATEREPO_OPTS:-} ${ADDL_OPTS:-} {} \;
-  variables:
-    PUBBASE: ~/public_html
   artifacts: {}
   cache: {}
 
+repo:
+  extends: .repo
+  tags:
+    - repo
+    - prod
+  only:
+    - master
+  variables:
+    PUBBASE: ~/public_html
+
 repo_test:
-  extends: repo
+  extends: .repo
   tags:
     - repo
     - test
-  only:{}
   except:
     - master
   variables:
