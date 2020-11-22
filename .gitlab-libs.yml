@@ -131,6 +131,7 @@ repo_test:
   tags:
     - repo
     - test
+  only:{}
   except:
     - master
   variables:
