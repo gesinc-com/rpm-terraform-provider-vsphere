@@ -107,6 +107,7 @@ tools:
     - |
       TREE=${CI_COMMIT_REF_SLUG}/$(rpm --eval "%dis/%tro")
       PUBROOT=${PUBBASE}/${TREE}/
+      echo ${HOSTNAME}${PUBROOT}
       mkdir -p ${PUBROOT}
       # push any artifacts to service dir
       find . \
@@ -127,7 +128,7 @@ repo:
   only:
     - master
   variables:
-    PUBBASE: ~/public_html
+    PUBBASE: ${HOME}/public_html
 
 repo_test:
   extends: .repo
